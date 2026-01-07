@@ -60,7 +60,7 @@
     "prepublishOnly": "npm run clean && npm run lint && npm run test && npm run build",
     "clean": "rm -rf dist es lib coverage dist-tsc",
     "build": "npm run build:types && npm run build:es && npm run build:commonjs && npm run build:umd && npm run build:umd:min && npm run build:styles && npm run build:styles:min",
-    "build:types": "tsc --project tsconfig.json",
+    "build:types": "tsc --project tsconfig.build.json",
     "build:es": "babel src -d es --config-file ./.babelrc.library.json --ignore __tests__ --extensions .ts,.tsx && cp dist-tsc/*.d.ts es/ && cp dist-tsc/*.d.ts.map es/",
     "build:commonjs": "BABEL_ENV=commonjs babel src -d lib --config-file ./.babelrc.library.json --ignore __tests__ --extensions .ts,.tsx && cp dist-tsc/*.d.ts lib/ && cp dist-tsc/*.d.ts.map lib/",
     "build:umd": "NODE_ENV=production webpack --mode production",
