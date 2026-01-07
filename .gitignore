@@ -41,3 +41,5 @@ dist-tsc/
 es
 lib
 _book
+.next
+out

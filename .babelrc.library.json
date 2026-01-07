@@ -1,4 +1,9 @@
 {
+  "ignore": [
+    "./app/**/*",
+    "./content/**/*",
+    "./.next/**/*"
+  ],
   "env": {
     "test": {
       "presets": [

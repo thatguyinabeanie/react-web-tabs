@@ -1,52 +1,52 @@
-# `<TabList>`
+# TabList
 
 A Tab List element with the correct WAI-ARIA attributes.
 
-```js
-import { TabList } from 'react-web-tabs'
+```jsx
+import { TabList } from '@thatguyinabeanie/react-web-tabs'
 
 <TabList>
-  <button>Tab 1</button>
-  <button>Tab 2</button>
+  <Tab tabFor="one">Tab 1</Tab>
+  <Tab tabFor="two">Tab 2</Tab>
 </TabList>
 ```
 
-## children: node
+## Props
+
+### children: node
 
 Any child node
 
-```js
+```jsx
 <TabList>
-  <button>Tab 1</button>
-  <button>Tab 2</button>
+  <Tab tabFor="one">Tab 1</Tab>
+  <Tab tabFor="two">Tab 2</Tab>
 </TabList>
 ```
 
-## vertical: bool (optional)
+### vertical: bool (optional)
 
 Adds the `aria-orientation="vertical"` attribute.
 Implicitly set when wrapped in a `<TabProvider>` or `<Tabs>` component with the vertical prop.
 
-```js
+```jsx
 <TabList vertical>
-  <button>Tab 1</button>
-  <button>Tab 2</button>
+  <Tab tabFor="one">Tab 1</Tab>
+  <Tab tabFor="two">Tab 2</Tab>
 </TabList>
 ```
 
-
-
-## props: mixed (optional)
+### Additional Props
 
 Any additional props that you can provide to a `<div>` element. E.g className, style, title, data attributes, etc.
 
-```js
+```jsx
 <TabList
   className="my-tablist"
   title="A tab list"
   style={{ background: 'rebeccapurple'}}
 >
-  <button>Tab 1</button>
-  <button>Tab 2</button>
+  <Tab tabFor="one">Tab 1</Tab>
+  <Tab tabFor="two">Tab 2</Tab>
 </TabList>
 ```

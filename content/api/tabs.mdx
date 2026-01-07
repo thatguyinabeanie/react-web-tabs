@@ -1,0 +1,72 @@
+# Tabs
+
+A Tabs container element that uses the `<TabProvider>` behind the scenes.
+
+```jsx
+import { Tabs } from '@thatguyinabeanie/react-web-tabs'
+
+<Tabs defaultTab="two" onChange={(tabId) => { console.log(tabId) }}>
+  <TabList>
+    <Tab tabFor="one">Tab 1</Tab>
+    <Tab tabFor="two">Tab 2</Tab>
+  </TabList>
+  <TabPanel tabId="one">
+    <p>Tab 1 content</p>
+  </TabPanel>
+  <TabPanel tabId="two">
+    <p>Tab 2 content</p>
+  </TabPanel>
+</Tabs>
+```
+
+## Props
+
+### children: node
+
+Any child node
+
+```jsx
+<Tabs>
+  <TabList>
+    <Tab tabFor="one">Tab 1</Tab>
+    <Tab tabFor="two">Tab 2</Tab>
+  </TabList>
+  <TabPanel tabId="one">
+    <p>Tab 1 content</p>
+  </TabPanel>
+  <TabPanel tabId="two">
+    <p>Tab 2 content</p>
+  </TabPanel>
+</Tabs>
+```
+
+### defaultTab: string (optional)
+
+See [TabProvider](/api/tab-provider#defaulttab-string-optional).
+
+### vertical: bool (optional)
+
+Adds the `data-rwt-vertical="true"` attribute and provides functionality for vertical tabs.
+See [TabProvider](/api/tab-provider#vertical-bool-optional).
+
+### collapsible: bool (optional)
+
+See [TabProvider](/api/tab-provider#collapsible-bool-optional).
+
+### onChange: func (optional)
+
+See [TabProvider](/api/tab-provider#onchange-func-optional).
+
+### Additional Props
+
+Any additional props that you can provide to a `<div>` element. E.g className, style, title, data attributes, etc.
+
+```jsx
+<Tabs
+  className="my-tabs"
+  title="My tabs"
+  style={{ background: 'rebeccapurple'}}
+>
+  ...
+</Tabs>
+```
