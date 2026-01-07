@@ -9,7 +9,6 @@ interface TabPanelComponentProps {
   selected?: boolean;
 }
 
-/* eslint-disable no-nested-ternary */
 function TabPanelComponent({
   component,
   render,

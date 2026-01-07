@@ -74,7 +74,6 @@ test('<TabProvider /> should update to new tab on click', async () => {
 test('<TabProvider /> should not reset to default tab when parent updates', async () => {
   const user = userEvent.setup();
 
-  /* eslint-disable react/no-unused-state */
   class TestComponent extends React.Component<Record<string, never>> {
     constructor(props: Record<string, never>) {
       super(props);
@@ -82,7 +81,6 @@ test('<TabProvider /> should not reset to default tab when parent updates', asyn
         value: 'one',
       };
     }
-    /* eslint-enable react/no-unused-state */
 
     render() {
       return (
