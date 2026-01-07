@@ -1,12 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import TabPanelComponent from '../TabPanelComponent';
+import TabSelection from '../TabSelection';
 
-const mockSelection = () => ({
+const mockSelection = (): TabSelection => ({
   subscribe: jest.fn(),
   unsubscribe: jest.fn(),
   isSelected: jest.fn(),
-});
+} as any);
 
 test('<TabPanelComponent /> should exist', () => {
   const { container } = render((
@@ -62,7 +63,7 @@ test('<TabPanelComponent /> should have the rwt__tabpanel className by default',
   ));
 
   const panel = container.querySelector('div');
-  expect(panel.className.trim()).toEqual('rwt__tabpanel');
+  expect(panel!.className.trim()).toEqual('rwt__tabpanel');
 });
 
 test('<TabPanelComponent /> should be able to set any className', () => {

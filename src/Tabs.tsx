@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactNode } from 'react';
 import TabProvider from './TabProvider';
 
-class Tabs extends Component {
+interface TabsProps {
+  children: ReactNode;
+  defaultTab?: string;
+  className?: string;
+  vertical?: boolean;
+  collapsible?: boolean;
+  onChange?: (tabId: string) => void;
+}
+
+class Tabs extends Component<TabsProps> {
   static defaultProps = {
     defaultTab: undefined,
     className: '',
     vertical: false,
     collapsible: false,
     onChange: undefined,
-  }
+  };
 
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    defaultTab: PropTypes.string,
-    className: PropTypes.string,
-    vertical: PropTypes.bool,
-    collapsible: PropTypes.bool,
-    onChange: PropTypes.func,
-  }
-
-  render() {
+  render(): ReactNode {
     const {
       children,
       defaultTab,

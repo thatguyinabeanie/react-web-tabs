@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactNode, MouseEvent, KeyboardEvent } from 'react';
 import TabComponent from './TabComponent';
-import withTabSelection from './withTabSelection';
+import withTabSelection, { WithTabSelectionProps } from './withTabSelection';
+import { SelectOptions } from './TabSelection';
 
 export const KeyCode = {
   END: 35,
@@ -12,35 +12,24 @@ export const KeyCode = {
   DOWN_ARROW: 40,
 };
 
-class Tab extends Component {
+interface TabProps extends WithTabSelectionProps {
+  tabFor: string;
+  children: ReactNode;
+  className?: string;
+  selected?: boolean;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+}
+
+class Tab extends Component<TabProps> {
   static defaultProps = {
     className: '',
     selected: false,
     onClick: undefined,
-  }
+  };
 
-  static propTypes = {
-    selection: PropTypes.shape({
-      subscribe: PropTypes.func.isRequired,
-      unsubscribe: PropTypes.func.isRequired,
-      register: PropTypes.func.isRequired,
-      unregister: PropTypes.func.isRequired,
-      isSelected: PropTypes.func.isRequired,
-      select: PropTypes.func.isRequired,
-      selectNext: PropTypes.func.isRequired,
-      selectPrevious: PropTypes.func.isRequired,
-      selectFirst: PropTypes.func.isRequired,
-      selectLast: PropTypes.func.isRequired,
-      isVertical: PropTypes.func.isRequired,
-    }).isRequired,
-    tabFor: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-    selected: PropTypes.bool,
-    onClick: PropTypes.func,
-  }
+  private tabComponent?: HTMLButtonElement | null;
 
-  constructor(props) {
+  constructor(props: TabProps) {
     super(props);
     this.update = this.update.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -49,23 +38,23 @@ class Tab extends Component {
     props.selection.register(props.tabFor);
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.props.selection.subscribe(this.update);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     this.props.selection.unsubscribe(this.update);
     this.props.selection.unregister(this.props.tabFor);
   }
 
-  update({ focus } = {}) {
+  update({ focus }: SelectOptions = {}): void {
     this.forceUpdate();
     if (focus && this.props.selection.isSelected(this.props.tabFor)) {
-      this.tabComponent.focus();
+      this.tabComponent?.focus();
     }
   }
 
-  handleClick(event) {
+  handleClick(event: MouseEvent<HTMLButtonElement>): void {
     this.props.selection.select(this.props.tabFor);
 
     if (this.props.onClick) {
@@ -73,7 +62,7 @@ class Tab extends Component {
     }
   }
 
-  handleKeyDown(e) {
+  handleKeyDown(e: KeyboardEvent<HTMLButtonElement>): void {
     const verticalOrientation = this.props.selection.isVertical();
     if (e.keyCode === KeyCode.HOME) {
       this.props.selection.selectFirst({ focus: true });
@@ -92,8 +81,10 @@ class Tab extends Component {
     }
   }
 
-  render() {
-    const { tabFor, children, className, ...props } = this.props;
+  render(): ReactNode {
+    const {
+      tabFor, children, className, selection, ...props
+    } = this.props;
     const isSelected = this.props.selection.isSelected(tabFor);
 
     return (
@@ -111,6 +102,5 @@ class Tab extends Component {
     );
   }
 }
-
 
 export default withTabSelection(Tab);

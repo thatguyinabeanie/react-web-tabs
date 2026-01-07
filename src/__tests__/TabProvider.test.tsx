@@ -62,7 +62,7 @@ test('<TabProvider /> should update to new tab on click', async () => {
   const secondTab = document.getElementById('second-tab');
   const secondPanel = document.getElementById('second');
 
-  await user.click(firstTab);
+  await user.click(firstTab!);
 
   expect(firstTab).toHaveAttribute('aria-selected', 'true');
   expect(firstPanel).toHaveAttribute('aria-expanded', 'true');
@@ -76,7 +76,7 @@ test('<TabProvider /> should not reset to default tab when parent updates', asyn
 
   /* eslint-disable react/no-unused-state */
   class TestComponent extends React.Component {
-    constructor(props) {
+    constructor(props: {}) {
       super(props);
       this.state = {
         value: 'one',
@@ -111,7 +111,7 @@ test('<TabProvider /> should not reset to default tab when parent updates', asyn
   expect(secondTab).toHaveAttribute('aria-selected', 'true');
   expect(secondPanel).toHaveAttribute('aria-expanded', 'true');
 
-  await user.click(firstTab);
+  await user.click(firstTab!);
 
   expect(firstTab).toHaveAttribute('aria-selected', 'true');
   expect(firstPanel).toHaveAttribute('aria-expanded', 'true');
@@ -143,7 +143,7 @@ test('<TabProvider /> should call onChange callback on selection', async () => {
   ));
 
   const firstTab = document.getElementById('first-tab');
-  await user.click(firstTab);
+  await user.click(firstTab!);
 
   expect(onChange).toHaveBeenCalledWith('first');
 });
@@ -247,7 +247,7 @@ test('<TabProvider /> should not change selection when prop updates to currently
   const secondTab = document.getElementById('second-tab');
   const secondPanel = document.getElementById('second');
 
-  await user.click(secondTab);
+  await user.click(secondTab!);
 
   rerender(
     <TabProvider defaultTab="second" onChange={onChange}>
@@ -283,7 +283,7 @@ test('<TabProvider /> should shift tab using keyboard navigation', () => {
   const firstTab = document.getElementById('first-tab');
   const secondTab = document.getElementById('second-tab');
 
-  fireEvent.keyDown(secondTab, { keyCode: KeyCode.LEFT_ARROW });
+  fireEvent.keyDown(secondTab!, { keyCode: KeyCode.LEFT_ARROW });
   expect(firstTab).toHaveAttribute('aria-selected', 'true');
 });
 
@@ -304,7 +304,7 @@ test('<TabProvider /> should shift tab using keyboard navigation when vertical',
   const firstTab = document.getElementById('first-tab');
   const secondTab = document.getElementById('second-tab');
 
-  fireEvent.keyDown(secondTab, { keyCode: KeyCode.UP_ARROW });
+  fireEvent.keyDown(secondTab!, { keyCode: KeyCode.UP_ARROW });
   expect(firstTab).toHaveAttribute('aria-selected', 'true');
 });
 

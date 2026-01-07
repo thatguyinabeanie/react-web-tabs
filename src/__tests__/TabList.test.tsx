@@ -2,10 +2,11 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import TabList from '../TabList';
+import TabSelection from '../TabSelection';
 
-const mockSelection = () => ({
+const mockSelection = (): TabSelection => ({
   isVertical: jest.fn(),
-});
+} as any);
 
 test('<TabList /> should exist', () => {
   const { container } = render((

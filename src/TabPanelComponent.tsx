@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactNode, ComponentType } from 'react';
+
+interface TabPanelComponentProps {
+  tabId: string;
+  children?: ReactNode;
+  className?: string;
+  component?: ComponentType<{ selected: boolean }>;
+  render?: (props: { selected: boolean }) => ReactNode;
+  selected?: boolean;
+}
 
 /* eslint-disable no-nested-ternary */
-class TabPanelComponent extends Component {
+class TabPanelComponent extends Component<TabPanelComponentProps> {
   static defaultProps = {
     className: '',
     component: null,
     children: null,
     render: null,
     selected: false,
-  }
+  };
 
-  static propTypes = {
-    tabId: PropTypes.string.isRequired,
-    children: PropTypes.node,
-    className: PropTypes.string,
-    component: PropTypes.func,
-    render: PropTypes.func,
-    selected: PropTypes.bool,
-  }
-
-  render() {
+  render(): ReactNode {
     const {
       component,
       render,
@@ -31,7 +30,7 @@ class TabPanelComponent extends Component {
       ...props
     } = this.props;
 
-    const childProps = { selected };
+    const childProps = { selected: selected || false };
     return (
       <div
         {...props}
@@ -53,7 +52,6 @@ class TabPanelComponent extends Component {
       </div>
     );
   }
-
 }
 
 export default TabPanelComponent;

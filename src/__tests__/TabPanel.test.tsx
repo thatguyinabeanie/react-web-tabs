@@ -1,12 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import TabPanel from '../TabPanel';
+import TabSelection from '../TabSelection';
 
-const mockSelection = () => ({
+const mockSelection = (): TabSelection => ({
   subscribe: jest.fn(),
   unsubscribe: jest.fn(),
   isSelected: jest.fn(),
-});
+} as any);
 
 test('<TabPanel /> should exist', () => {
   const { container } = render((

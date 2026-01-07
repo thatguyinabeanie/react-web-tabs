@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = (env = {}) => ({
-  entry: './src/index.js',
+  entry: './src/index.ts',
   mode: env.minify ? 'production' : 'development',
 
   output: {
@@ -34,13 +34,13 @@ module.exports = (env = {}) => ({
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
 
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(tsx?|jsx?)$/,
         exclude: /node_modules/,
         use: 'babel-loader',
       },

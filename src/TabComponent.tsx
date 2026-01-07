@@ -1,7 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactNode, MouseEvent, KeyboardEvent } from 'react';
 
-class TabComponent extends Component {
+interface TabComponentProps {
+  tabFor: string;
+  children: ReactNode;
+  className?: string;
+  selected?: boolean;
+  focusable?: boolean;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLButtonElement>) => void;
+  tabRef?: (element: HTMLButtonElement | null) => void;
+}
+
+class TabComponent extends Component<TabComponentProps> {
   static defaultProps = {
     className: '',
     selected: false,
@@ -9,20 +19,9 @@ class TabComponent extends Component {
     onClick: undefined,
     onKeyDown: undefined,
     tabRef: undefined,
-  }
+  };
 
-  static propTypes = {
-    tabFor: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-    selected: PropTypes.bool,
-    focusable: PropTypes.bool,
-    onClick: PropTypes.func,
-    onKeyDown: PropTypes.func,
-    tabRef: PropTypes.func,
-  }
-
-  render() {
+  render(): ReactNode {
     const {
       tabFor,
       children,
@@ -44,15 +43,15 @@ class TabComponent extends Component {
         aria-controls={tabFor}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        tabIndex={focusable || selected ? '0' : '-1'}
+        tabIndex={focusable || selected ? 0 : -1}
         className={`rwt__tab ${className || ''}`}
         ref={tabRef}
+        type="button"
       >
         {children}
       </button>
     );
   }
-
 }
 
 export default TabComponent;

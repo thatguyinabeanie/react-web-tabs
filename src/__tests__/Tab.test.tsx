@@ -2,8 +2,9 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Tab, { KeyCode } from '../Tab';
+import TabSelection from '../TabSelection';
 
-const mockSelection = () => ({
+const mockSelection = (): TabSelection => ({
   register: jest.fn(),
   unregister: jest.fn(),
   subscribe: jest.fn(),
@@ -15,7 +16,7 @@ const mockSelection = () => ({
   selectFirst: jest.fn(),
   selectLast: jest.fn(),
   isVertical: jest.fn(),
-});
+} as any);
 
 test('<Tab /> should exist', () => {
   const { container } = render(
