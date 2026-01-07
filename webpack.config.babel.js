@@ -1,12 +1,6 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
+const path = require('path');
 
-/* eslint-disable no-underscore-dangle */
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-/* eslint-enable no-underscore-dangle */
-
-export default (env = {}) => ({
+module.exports = (env = {}) => ({
   entry: './src/index.js',
   mode: env.minify ? 'production' : 'development',
 

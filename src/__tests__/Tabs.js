@@ -1,54 +1,55 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import Tabs from '../Tabs';
-import TabProvider from '../TabProvider';
 
 test('<Tabs /> should exist', () => {
-  const tabs = mount((
+  const { container } = render((
     <Tabs><p>Foo</p></Tabs>
   ));
 
-  expect(tabs).toBeDefined();
+  expect(container.firstChild).toBeInTheDocument();
 });
 
 test('<Tabs /> should have the className rwt__tabs by default', () => {
-  const tabs = mount((
+  const { container } = render((
     <Tabs><p>Foo</p></Tabs>
   ));
 
-  expect(tabs.find('.rwt__tabs')).toBeDefined();
+  expect(container.querySelector('.rwt__tabs')).toBeInTheDocument();
 });
 
 test('<Tabs /> should be able to set any classname', () => {
-  const tabs = mount((
+  const { container } = render((
     <Tabs className="foo"><p>Foo</p></Tabs>
   ));
 
-  expect(tabs.find('.rwt__tabs')).toBeDefined();
-  expect(tabs.find('.foo')).toBeDefined();
+  expect(container.querySelector('.rwt__tabs')).toBeInTheDocument();
+  expect(container.querySelector('.foo')).toBeInTheDocument();
 });
 
 test('<Tabs /> should render children', () => {
-  const tabs = mount((
+  render((
     <Tabs><p id="child">Foo</p></Tabs>
   ));
 
-  expect(tabs.find('#child')).toBeDefined();
+  expect(screen.getByText('Foo')).toBeInTheDocument();
 });
 
 test('<Tabs /> should be able to pass vertical prop', () => {
-  const tabs = mount((
+  const { container } = render((
     <Tabs vertical><p>Foo</p></Tabs>
   ));
 
-  expect(tabs.find('[data-rwt-vertical="true"]')).toBeDefined();
+  expect(container.querySelector('[data-rwt-vertical="true"]')).toBeInTheDocument();
 });
 
 test('<Tabs /> should by wrapped by a tabProvider', () => {
-  const tabs = mount((
+  const { container } = render((
     <Tabs><p>Foo</p></Tabs>
   ));
 
-  expect(tabs.find(TabProvider)).toBeDefined();
+  // TabProvider doesn't render a specific element, but we can verify the component structure
+  // by checking that the tabs wrapper exists
+  expect(container.querySelector('.rwt__tabs')).toBeInTheDocument();
 });

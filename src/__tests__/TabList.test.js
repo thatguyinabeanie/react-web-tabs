@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import TabList from '../TabList';
 
@@ -8,21 +8,21 @@ const mockSelection = () => ({
 });
 
 test('<TabList /> should exist', () => {
-  const tabList = shallow((
+  const { container } = render((
     <TabList.WrappedComponent selection={mockSelection()}>
       <span>Foo</span>
     </TabList.WrappedComponent>
   ));
 
-  expect(tabList).toBeDefined();
+  expect(container.firstChild).toBeInTheDocument();
 });
 
 test('<TabList /> should render children', () => {
-  const tabList = mount((
+  render((
     <TabList.WrappedComponent selection={mockSelection()}>
       <span id="content">Foo</span>
     </TabList.WrappedComponent>
   ));
 
-  expect(tabList.find('#content')).toBeTruthy();
+  expect(screen.getByText('Foo')).toBeInTheDocument();
 });

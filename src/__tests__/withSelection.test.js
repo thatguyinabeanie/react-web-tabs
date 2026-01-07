@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 
 import { TabProvider } from '..';
 import withTabSelection from '../withTabSelection';
@@ -10,7 +10,7 @@ function Foo() {
 
 test('<WrappedComponent /> should exist', () => {
   const WrappedComponent = withTabSelection(Foo);
-  const wrappedComponent = mount((
+  const { container } = render((
     <TabProvider>
       <div>
         <WrappedComponent />
@@ -18,7 +18,7 @@ test('<WrappedComponent /> should exist', () => {
     </TabProvider>
   ));
 
-  expect(wrappedComponent).toBeDefined();
+  expect(container.firstChild).toBeInTheDocument();
 });
 
 test('<WrappedComponent /> should return WrappedComponent', () => {
