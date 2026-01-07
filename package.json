@@ -50,13 +50,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:ci": "npm run test:coverage && cat coverage/lcov.info | coveralls",
-    "lint": "eslint . --max-warnings 0",
-    "docs:clean": "rm -rf _book",
-    "docs:prepare": "gitbook install",
-    "docs:build": "npm run docs:prepare && gitbook build -g marcuslindfeldt/react-web-tabs",
-    "docs:watch": "npm run docs:prepare && gitbook serve",
-    "docs:publish": "npm run docs:clean && npm run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:marcuslindfeldt/react-web-tabs gh-pages --force"
+    "lint": "eslint . --max-warnings 0"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.0",
@@ -87,7 +81,6 @@
     "prop-types": "^15.8.1",
     "react": "^18",
     "react-dom": "^18",
-    "react-test-renderer": "^18",
     "webpack": "^5.90.3",
     "webpack-cli": "^5.1.4"
   },
