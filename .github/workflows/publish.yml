@@ -38,8 +38,20 @@ jobs:
       - name: Build package
         run: npm run build
 
-      - name: Update version (if specified)
-        if: github.event.inputs.version != ''
+      - name: Extract version from release tag
+        if: github.event_name == 'release'
+        id: get_version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Extracted version: $VERSION"
+
+      - name: Update package.json version from release tag
+        if: github.event_name == 'release'
+        run: npm version ${{ steps.get_version.outputs.version }} --no-git-tag-version
+
+      - name: Update package.json version from manual input
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.version != ''
         run: npm version ${{ github.event.inputs.version }} --no-git-tag-version
 
       - name: Publish to GitHub Packages
