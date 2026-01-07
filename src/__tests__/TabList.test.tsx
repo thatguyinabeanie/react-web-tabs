@@ -6,7 +6,7 @@ import TabSelection from '../TabSelection';
 
 const mockSelection = (): TabSelection => ({
   isVertical: jest.fn(),
-} as any);
+} as unknown as TabSelection);
 
 test('<TabList /> should exist', () => {
   const { container } = render((

@@ -2,7 +2,7 @@ import React, { ComponentType } from 'react';
 import { TabSelectionContext } from './TabProvider';
 import TabSelection from './TabSelection';
 
-function getDisplayName(WrappedComponent: ComponentType<any>): string {
+function getDisplayName<P>(WrappedComponent: ComponentType<P>): string {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
@@ -15,11 +15,13 @@ const withTabSelection = <P extends WithTabSelectionProps>(
 ): ComponentType<Omit<P, 'selection'>> & {
   WrappedComponent: ComponentType<P>;
 } => {
-  const TabSelectionComponent = (props: Omit<P, 'selection'>) => (
-    <TabSelectionContext.Consumer>
-      {(selection) => <Component {...(props as P)} selection={selection} />}
-    </TabSelectionContext.Consumer>
-  );
+  function TabSelectionComponent(props: Omit<P, 'selection'>) {
+    return (
+      <TabSelectionContext.Consumer>
+        {(selection) => <Component {...(props as P)} selection={selection} />}
+      </TabSelectionContext.Consumer>
+    );
+  }
 
   TabSelectionComponent.displayName = `withTabSelection(${getDisplayName(Component)})`;
 

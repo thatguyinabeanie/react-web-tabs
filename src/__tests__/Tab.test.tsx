@@ -16,7 +16,9 @@ const mockSelection = (): TabSelection => ({
   selectFirst: jest.fn(),
   selectLast: jest.fn(),
   isVertical: jest.fn(),
-} as any);
+  tabs: [],
+  selected: undefined,
+} as unknown as TabSelection);
 
 test('<Tab /> should exist', () => {
   const { container } = render(

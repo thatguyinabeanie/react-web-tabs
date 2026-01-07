@@ -37,7 +37,7 @@ class TabPanel extends Component<TabPanelProps> {
       ...props
     } = this.props;
 
-    const selected = this.props.selection.isSelected(tabId);
+    const selected = selection.isSelected(tabId);
 
     return (
       <TabPanelComponent

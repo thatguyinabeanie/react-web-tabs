@@ -1,4 +1,4 @@
-import React, { Component, ReactNode, ComponentType } from 'react';
+import React, { ReactNode, ComponentType } from 'react';
 
 interface TabPanelComponentProps {
   tabId: string;
@@ -10,48 +10,33 @@ interface TabPanelComponentProps {
 }
 
 /* eslint-disable no-nested-ternary */
-class TabPanelComponent extends Component<TabPanelComponentProps> {
-  static defaultProps = {
-    className: '',
-    component: null,
-    children: null,
-    render: null,
-    selected: false,
-  };
-
-  render(): ReactNode {
-    const {
-      component,
-      render,
-      tabId,
-      children,
-      className,
-      selected,
-      ...props
-    } = this.props;
-
-    const childProps = { selected: selected || false };
-    return (
-      <div
-        {...props}
-        id={tabId}
-        role="tabpanel"
-        aria-expanded={selected}
-        aria-hidden={!selected}
-        aria-labelledby={`${tabId}-tab`}
-        hidden={!selected}
-        className={`rwt__tabpanel ${className || ''}`}
-      >
-        {component ? (
-          React.createElement(component, childProps)
-        ) : render ? (
-          render(childProps)
-        ) : children ? (
-          children
-        ) : null}
-      </div>
-    );
-  }
+function TabPanelComponent({
+  component,
+  render,
+  tabId,
+  children = null,
+  className = '',
+  selected = false,
+  ...props
+}: TabPanelComponentProps): ReactNode {
+  const childProps = { selected };
+  return (
+    <div
+      {...props}
+      id={tabId}
+      role="tabpanel"
+      aria-expanded={selected}
+      aria-hidden={!selected}
+      aria-labelledby={`${tabId}-tab`}
+      className={`rwt__tabpanel ${className || ''}`}
+    >
+      {component ? (
+        React.createElement(component, childProps)
+      ) : render ? (
+        render(childProps)
+      ) : children}
+    </div>
+  );
 }
 
 export default TabPanelComponent;

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const path = require('path');
 
 module.exports = (env = {}) => ({
@@ -24,12 +25,6 @@ module.exports = (env = {}) => ({
       commonjs2: 'react-dom',
       amd: 'react-dom',
       root: 'ReactDOM',
-    },
-    'prop-types': {
-      commonjs: 'prop-types',
-      commonjs2: 'prop-types',
-      amd: 'prop-types',
-      root: 'PropTypes',
     },
   },
 

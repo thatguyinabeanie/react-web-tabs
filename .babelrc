@@ -7,6 +7,7 @@
         "@babel/preset-react"
       ],
       "plugins": [
+        ["babel-plugin-react-compiler", { "target": "18" }],
         "@babel/plugin-transform-class-properties",
         "@babel/plugin-transform-object-rest-spread"
       ]
@@ -18,6 +19,7 @@
         ["@babel/preset-react", { "runtime": "automatic" }]
       ],
       "plugins": [
+        ["babel-plugin-react-compiler", { "target": "18" }],
         "@babel/plugin-transform-class-properties",
         "@babel/plugin-transform-object-rest-spread"
       ]
@@ -29,6 +31,7 @@
         ["@babel/preset-react", { "runtime": "automatic" }]
       ],
       "plugins": [
+        ["babel-plugin-react-compiler", { "target": "18" }],
         "@babel/plugin-transform-class-properties",
         "@babel/plugin-transform-object-rest-spread"
       ]
@@ -40,6 +43,7 @@
     ["@babel/preset-react", { "runtime": "automatic" }]
   ],
   "plugins": [
+    ["babel-plugin-react-compiler", { "target": "18" }],
     "@babel/plugin-transform-class-properties",
     "@babel/plugin-transform-object-rest-spread"
   ]

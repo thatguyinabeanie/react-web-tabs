@@ -7,7 +7,7 @@ const mockSelection = (): TabSelection => ({
   subscribe: jest.fn(),
   unsubscribe: jest.fn(),
   isSelected: jest.fn(),
-} as any);
+} as unknown as TabSelection);
 
 test('<TabPanelComponent /> should exist', () => {
   const { container } = render((

@@ -1,4 +1,6 @@
-import React, { Component, ReactNode, MouseEvent, KeyboardEvent } from 'react';
+import React, {
+  Component, ReactNode, MouseEvent, KeyboardEvent,
+} from 'react';
 import TabComponent from './TabComponent';
 import withTabSelection, { WithTabSelectionProps } from './withTabSelection';
 import { SelectOptions } from './TabSelection';
@@ -85,7 +87,7 @@ class Tab extends Component<TabProps> {
     const {
       tabFor, children, className, selection, ...props
     } = this.props;
-    const isSelected = this.props.selection.isSelected(tabFor);
+    const isSelected = selection.isSelected(tabFor);
 
     return (
       <TabComponent

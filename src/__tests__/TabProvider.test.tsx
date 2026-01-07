@@ -75,8 +75,8 @@ test('<TabProvider /> should not reset to default tab when parent updates', asyn
   const user = userEvent.setup();
 
   /* eslint-disable react/no-unused-state */
-  class TestComponent extends React.Component {
-    constructor(props: {}) {
+  class TestComponent extends React.Component<Record<string, never>> {
+    constructor(props: Record<string, never>) {
       super(props);
       this.state = {
         value: 'one',
