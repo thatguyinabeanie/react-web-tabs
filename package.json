@@ -45,15 +45,24 @@
     ],
     "moduleNameMapper": {
       "^react/compiler-runtime$": "react-compiler-runtime"
-    }
+    },
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { "configFile": "./.babelrc.library.json" }]
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/es/",
+      "/lib/",
+      "/dist/"
+    ]
   },
   "scripts": {
     "prepublishOnly": "npm run clean && npm run lint && npm run test && npm run build",
     "clean": "rm -rf dist es lib coverage dist-tsc",
     "build": "npm run build:types && npm run build:es && npm run build:commonjs && npm run build:umd && npm run build:umd:min && npm run build:styles && npm run build:styles:min",
     "build:types": "tsc --project tsconfig.json",
-    "build:es": "babel src -d es --ignore __tests__ --extensions .ts,.tsx && cp dist-tsc/*.d.ts es/ && cp dist-tsc/*.d.ts.map es/",
-    "build:commonjs": "BABEL_ENV=commonjs babel src -d lib --ignore __tests__ --extensions .ts,.tsx && cp dist-tsc/*.d.ts lib/ && cp dist-tsc/*.d.ts.map lib/",
+    "build:es": "babel src -d es --config-file ./.babelrc.library.json --ignore __tests__ --extensions .ts,.tsx && cp dist-tsc/*.d.ts es/ && cp dist-tsc/*.d.ts.map es/",
+    "build:commonjs": "BABEL_ENV=commonjs babel src -d lib --config-file ./.babelrc.library.json --ignore __tests__ --extensions .ts,.tsx && cp dist-tsc/*.d.ts lib/ && cp dist-tsc/*.d.ts.map lib/",
     "build:umd": "NODE_ENV=production webpack --mode production",
     "build:umd:min": "NODE_ENV=production webpack --mode production --env minify=true",
     "build:styles": "postcss -o dist/react-web-tabs.css styles/*.css",
@@ -63,7 +72,9 @@
     "test:coverage": "jest --coverage",
     "lint": "eslint . --max-warnings 0",
     "tsc": "tsc --noEmit",
-    "prepare": "husky"
+    "prepare": "husky",
+    "docs:dev": "next dev",
+    "docs:build": "next build"
   },
   "devDependencies": {
     "@babel/cli": "^7.28.3",
@@ -98,6 +109,9 @@
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
     "lint-staged": "^16.2.7",
+    "next": "^16.1.1",
+    "nextra": "^4.6.1",
+    "nextra-theme-docs": "^4.6.1",
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
     "postcss-import": "^16.1.1",

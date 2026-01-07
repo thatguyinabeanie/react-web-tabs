@@ -9,7 +9,7 @@ import globals from 'globals';
 export default [
   // Base configuration for all files
   {
-    ignores: ['dist/**', 'es/**', 'lib/**', 'coverage/**', 'dist-tsc/**', 'node_modules/**']
+    ignores: ['dist/**', 'es/**', 'lib/**', 'coverage/**', 'dist-tsc/**', 'node_modules/**', 'app/**']
   },
   
   // JavaScript/TypeScript files
