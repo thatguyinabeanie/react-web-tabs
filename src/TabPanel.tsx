@@ -11,7 +11,6 @@ interface TabPanelProps extends WithTabSelectionProps {
   render?: (props: { selected: boolean }) => ReactNode;
 }
 
-/* eslint-disable no-nested-ternary */
 class TabPanel extends Component<TabPanelProps> {
   constructor(props: TabPanelProps) {
     super(props);
