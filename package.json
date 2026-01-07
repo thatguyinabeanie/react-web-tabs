@@ -10,13 +10,16 @@
     "lib"
   ],
   "author": "Marcus Lindfeldt",
-  "homepage": "https://github.com/marcuslindfeldt/react-web-tabs",
+  "homepage": "https://github.com/thatguyinabeanie/react-web-tabs",
   "bugs": {
-    "url": "https://github.com/marcuslindfeldt/react-web-tabs/issues"
+    "url": "https://github.com/thatguyinabeanie/react-web-tabs/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/marcuslindfeldt/react-web-tabs.git"
+    "url": "https://github.com/thatguyinabeanie/react-web-tabs.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "keywords": [
     "react",
