@@ -26,10 +26,19 @@ module.exports = (env = {}) => ({
       amd: 'react-dom',
       root: 'ReactDOM',
     },
+    'react-compiler-runtime': {
+      commonjs: 'react-compiler-runtime',
+      commonjs2: 'react-compiler-runtime',
+      amd: 'react-compiler-runtime',
+      root: 'ReactCompilerRuntime',
+    },
   },
 
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      'react/compiler-runtime': 'react-compiler-runtime',
+    },
   },
 
   module: {
