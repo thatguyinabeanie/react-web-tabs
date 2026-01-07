@@ -1,6 +1,6 @@
-module.exports = ({ env } = {}) => ({
+module.exports = {
   plugins: {
     'postcss-import': true,
-    cssnano: env === 'production' ? {} : false,
+    cssnano: process.env.NODE_ENV === 'production' ? {} : false,
   },
-});
+};

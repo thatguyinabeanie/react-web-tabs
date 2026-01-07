@@ -10,14 +10,4 @@ export default withNextra({
     unoptimized: true,
   },
   basePath: '/react-web-tabs',
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/react-web-tabs',
-        basePath: false,
-        permanent: false,
-      },
-    ]
-  },
 })
