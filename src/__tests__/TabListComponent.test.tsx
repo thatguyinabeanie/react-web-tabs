@@ -1,52 +1,52 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import TabListComponent from '../TabListComponent';
 
 test('<TabListComponent /> should exist', () => {
-  const tabList = shallow((
+  const { container } = render((
     <TabListComponent>
       <span>Foo</span>
     </TabListComponent>
   ));
 
-  expect(tabList).toBeDefined();
+  expect(container.firstChild).toBeInTheDocument();
 });
 
 test('<TabListComponent /> should render children', () => {
-  const tabList = mount((
+  render((
     <TabListComponent>
       <span id="content">Foo</span>
     </TabListComponent>
   ));
 
-  expect(tabList.find('#content')).toBeTruthy();
+  expect(screen.getByText('Foo')).toBeInTheDocument();
 });
 
 test('<TabListComponent /> should have the correct aria attributes', () => {
-  const tabList = shallow((
+  const { container } = render((
     <TabListComponent>
       <span>Foo</span>
     </TabListComponent>
   ));
 
-  expect(tabList.prop('role')).toEqual('tablist');
+  expect(container.firstChild).toHaveAttribute('role', 'tablist');
 });
 
 test('<TabListComponent /> should be able to set any className', () => {
-  const tabList = shallow((
+  const { container } = render((
     <TabListComponent className="foo">
       <span>Foo</span>
     </TabListComponent>
   ));
 
-  expect(tabList.hasClass('foo')).toBe(true);
+  expect(container.firstChild).toHaveClass('foo');
 });
 
 test('<TabListComponent /> should be set aria-orientation when vertical', () => {
-  const tabList = shallow((
+  const { container } = render((
     <TabListComponent verticalOrientation><span>Foo</span></TabListComponent>
   ));
 
-  expect(tabList.prop('aria-orientation')).toBe('vertical');
+  expect(container.firstChild).toHaveAttribute('aria-orientation', 'vertical');
 });

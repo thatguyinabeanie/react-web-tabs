@@ -1,5 +1,8 @@
 dist
+dist-tsc
 es
 lib
 coverage
 _book
+*.config.js
+jestSetup.js

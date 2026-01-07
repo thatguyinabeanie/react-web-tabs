@@ -1,70 +1,75 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import TabPanelComponent from '../TabPanelComponent';
+import TabSelection from '../TabSelection';
 
-const mockSelection = () => ({
+const mockSelection = (): TabSelection => ({
   subscribe: jest.fn(),
   unsubscribe: jest.fn(),
   isSelected: jest.fn(),
-});
+} as unknown as TabSelection);
 
 test('<TabPanelComponent /> should exist', () => {
-  const tabPanel = mount((
+  const { container } = render((
     <TabPanelComponent selection={mockSelection()} tabId="foo"><span>Foo</span></TabPanelComponent>
   ));
 
-  expect(tabPanel).toBeDefined();
+  expect(container.firstChild).toBeInTheDocument();
 });
 
 test('<TabPanelComponent /> should render component', () => {
-  const Foo = () => (<span id="content">Foo</span>);
+  function Foo() {
+    return <span id="content">Foo</span>;
+  }
 
-  const tabPanel = mount((
-    <TabPanelComponent selection={mockSelection()} tabId="foo" component={Foo} />
+  const FooComponent = Foo;
+  render((
+    <TabPanelComponent selection={mockSelection()} tabId="foo" component={FooComponent} />
   ));
 
-  expect(tabPanel.find('#content')).toBeTruthy();
-  expect(tabPanel.find('Foo')).toBeTruthy();
+  expect(screen.getByText('Foo')).toBeInTheDocument();
 });
 
 test('<TabPanelComponent /> should be able to pass a render function', () => {
-  const tabPanel = mount((
+  render((
     <TabPanelComponent selection={mockSelection()} tabId="foo" render={() => (<span id="content">Foo</span>)} />
   ));
 
-  expect(tabPanel.find('#content')).toBeTruthy();
+  expect(screen.getByText('Foo')).toBeInTheDocument();
 });
 
 test('<TabPanelComponent /> should render children', () => {
-  const tabPanel = mount((
+  render((
     <TabPanelComponent selection={mockSelection()} tabId="foo"><span id="content">Foo</span></TabPanelComponent>
   ));
 
-  expect(tabPanel.find('#content')).toBeTruthy();
+  expect(screen.getByText('Foo')).toBeInTheDocument();
 });
 
 test('<TabPanelComponent /> should have the correct aria attributes', () => {
-  const tabPanel = mount((
+  const { container } = render((
     <TabPanelComponent selection={mockSelection()} tabId="foo"><span>Foo</span></TabPanelComponent>
   ));
 
-  expect(tabPanel.find('div').prop('id')).toBe('foo');
-  expect(tabPanel.find('div').prop('aria-labelledby')).toBe('foo-tab');
-  expect(tabPanel.find('div').prop('role')).toBe('tabpanel');
+  const panel = container.querySelector('div');
+  expect(panel).toHaveAttribute('id', 'foo');
+  expect(panel).toHaveAttribute('aria-labelledby', 'foo-tab');
+  expect(panel).toHaveAttribute('role', 'tabpanel');
 });
 
 test('<TabPanelComponent /> should have the rwt__tabpanel className by default', () => {
-  const tabPanel = mount((
+  const { container } = render((
     <TabPanelComponent selection={mockSelection()} tabId="foo"><span>Foo</span></TabPanelComponent>
   ));
 
-  expect(tabPanel.find('div').prop('className').trim()).toEqual('rwt__tabpanel');
+  const panel = container.querySelector('div');
+  expect(panel!.className.trim()).toEqual('rwt__tabpanel');
 });
 
 test('<TabPanelComponent /> should be able to set any className', () => {
-  const tabPanel = shallow((
+  const { container } = render((
     <TabPanelComponent selection={mockSelection()} tabId="foo" className="foo"><span>Foo</span></TabPanelComponent>
   ));
 
-  expect(tabPanel.hasClass('foo')).toBe(true);
+  expect(container.firstChild).toHaveClass('foo');
 });

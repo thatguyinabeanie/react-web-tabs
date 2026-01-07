@@ -1,13 +1,16 @@
-import path from 'path';
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const path = require('path');
 
-export default ({ minify = false } = {}) => ({
-  entry: './src/index.js',
+module.exports = (env = {}) => ({
+  entry: './src/index.ts',
+  mode: env.minify ? 'production' : 'development',
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: `react-web-tabs${minify ? '.min' : ''}.js`,
+    filename: `react-web-tabs${env.minify ? '.min' : ''}.js`,
     libraryTarget: 'umd',
     library: 'react-web-tabs',
+    globalObject: 'this',
   },
 
   externals: {
@@ -23,22 +26,16 @@ export default ({ minify = false } = {}) => ({
       amd: 'react-dom',
       root: 'ReactDOM',
     },
-    'prop-types': {
-      commonjs: 'prop-types',
-      commonjs2: 'prop-types',
-      amd: 'prop-types',
-      root: 'PropTypes',
-    },
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
 
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(tsx?|jsx?)$/,
         exclude: /node_modules/,
         use: 'babel-loader',
       },
