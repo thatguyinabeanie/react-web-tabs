@@ -1,4 +1,4 @@
-import React, {
+import {
   ReactNode, MouseEvent, KeyboardEvent,
 } from 'react';
 

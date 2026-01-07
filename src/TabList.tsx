@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import TabListComponent from './TabListComponent';
 import withTabSelection, { WithTabSelectionProps } from './withTabSelection';
 
