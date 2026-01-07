@@ -1,0 +1,46 @@
+# Source files
+src/
+styles/
+
+# Build artifacts (temporary)
+dist-tsc/
+
+# Test files
+**/__tests__/
+*.test.ts
+*.test.tsx
+*.test.js
+*.test.jsx
+coverage/
+.nyc_output/
+
+# Development files
+.babelrc
+.eslintrc
+.eslintignore
+tsconfig.json
+webpack.config.babel.js
+jestSetup.js
+postcss.config.js
+
+# Version control
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
