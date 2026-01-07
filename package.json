@@ -122,5 +122,8 @@
     "*.{js,jsx}": [
       "eslint --fix"
     ]
+  },
+  "overrides": {
+    "zod-validation-error": "^4.0.0"
   }
 }
