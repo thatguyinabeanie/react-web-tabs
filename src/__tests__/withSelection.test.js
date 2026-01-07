@@ -1,12 +1,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { TabProvider } from '../';
+import { TabProvider } from '..';
 import withTabSelection from '../withTabSelection';
 
-const Foo = () => (
-  <p>Foo</p>
-);
+function Foo() {
+  return <p>Foo</p>;
+}
 
 test('<WrappedComponent /> should exist', () => {
   const WrappedComponent = withTabSelection(Foo);

@@ -1,5 +1,7 @@
 class TabSelection {
-  constructor({ defaultTab, vertical = false, collapsible = false, onChange } = {}) {
+  constructor({
+    defaultTab, vertical = false, collapsible = false, onChange,
+  } = {}) {
     this.selected = defaultTab;
     this.tabs = [];
     this.subscribtions = [];
@@ -19,7 +21,7 @@ class TabSelection {
       this.selected = tabId;
     }
 
-    this.subscribtions.forEach(callback => callback({ focus }));
+    this.subscribtions.forEach((callback) => callback({ focus }));
 
     if (this.onChange) {
       this.onChange(tabId);
@@ -68,7 +70,7 @@ class TabSelection {
   }
 
   unregister(tabId) {
-    this.tabs = this.tabs.filter(id => id !== tabId);
+    this.tabs = this.tabs.filter((id) => id !== tabId);
   }
 
   subscribe(callback) {
@@ -76,7 +78,7 @@ class TabSelection {
   }
 
   unsubscribe(callback) {
-    this.subscribtions = this.subscribtions.filter(cb => cb !== callback);
+    this.subscribtions = this.subscribtions.filter((cb) => cb !== callback);
   }
 }
 

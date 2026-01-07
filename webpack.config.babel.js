@@ -1,13 +1,21 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-export default ({ minify = false } = {}) => ({
+/* eslint-disable no-underscore-dangle */
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+/* eslint-enable no-underscore-dangle */
+
+export default (env = {}) => ({
   entry: './src/index.js',
+  mode: env.minify ? 'production' : 'development',
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: `react-web-tabs${minify ? '.min' : ''}.js`,
+    filename: `react-web-tabs${env.minify ? '.min' : ''}.js`,
     libraryTarget: 'umd',
     library: 'react-web-tabs',
+    globalObject: 'this',
   },
 
   externals: {

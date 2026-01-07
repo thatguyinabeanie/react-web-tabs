@@ -1,7 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { Tab, TabProvider, TabPanel, TabList } from '../';
+import {
+  Tab, TabProvider, TabPanel, TabList,
+} from '..';
 import { KeyCode } from '../Tab';
 
 test('<TabProvider /> should exist', () => {
@@ -57,10 +59,15 @@ test('<TabProvider /> should update to new tab on click', () => {
 });
 
 test('<TabProvider /> should not reset to default tab when parent updates', () => {
+  /* eslint-disable react/no-unused-state */
   class TestComponent extends React.Component {
-    state = {
-      state: 'one',
+    constructor(props) {
+      super(props);
+      this.state = {
+        value: 'one',
+      };
     }
+    /* eslint-enable react/no-unused-state */
 
     render() {
       return (

@@ -46,9 +46,9 @@ class TabPanelComponent extends Component {
         {component ? (
           React.createElement(component, childProps)
         ) : render ? (
-          render(childProps) : null
+          render(childProps)
         ) : children ? (
-          children : null
+          children
         ) : null}
       </div>
     );

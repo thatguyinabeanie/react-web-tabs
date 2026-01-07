@@ -1,100 +1,102 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import TabComponent from '../TabComponent';
 
 test('<TabComponent /> should exist', () => {
-  const tab = shallow((
-    <TabComponent tabFor="foo"><span>Tab 1</span></TabComponent>
-  ));
+  const { container } = render(
+    <TabComponent tabFor="foo"><span>Tab 1</span></TabComponent>,
+  );
 
-  expect(tab).toBeDefined();
+  expect(container).toBeDefined();
 });
 
 test('<TabComponent /> should be a button', () => {
-  const tab = mount((
-    <TabComponent tabFor="foo"><span>Tab 1</span></TabComponent>
-  ));
+  render(
+    <TabComponent tabFor="foo"><span>Tab 1</span></TabComponent>,
+  );
 
-  expect(tab.find('button')).toBeDefined();
+  expect(screen.getByRole('tab')).toBeInTheDocument();
+  expect(screen.getByRole('tab').tagName).toBe('BUTTON');
 });
 
 test('<TabComponent /> should render children', () => {
   const content = <span id="content">Tab 1</span>;
-  const tab = mount((
-    <TabComponent tabFor="foo">{content}</TabComponent>
-  ));
+  render(
+    <TabComponent tabFor="foo">{content}</TabComponent>,
+  );
 
-  expect(tab.find('#content')).toBeTruthy();
+  expect(screen.getByText('Tab 1')).toBeInTheDocument();
 });
 
-test('<TabComponent /> should call callback on click', () => {
+test('<TabComponent /> should call callback on click', async () => {
+  const user = userEvent.setup();
   const onClick = jest.fn();
-  const tab = mount((
-    <TabComponent tabFor="foo" onClick={onClick}><span>Tab 1</span></TabComponent>
-  ));
+  render(
+    <TabComponent tabFor="foo" onClick={onClick}><span>Tab 1</span></TabComponent>,
+  );
 
-  tab.simulate('click');
+  await user.click(screen.getByRole('tab'));
 
   expect(onClick).toHaveBeenCalled();
 });
 
 test('<TabComponent /> should be selectable', () => {
-  const unselected = mount((
-    <TabComponent tabFor="foo"><span>Tab 1</span></TabComponent>
-  ));
+  const { rerender } = render(
+    <TabComponent tabFor="foo"><span>Tab 1</span></TabComponent>,
+  );
 
-  expect(unselected.find('button').prop('aria-selected')).toBe(false);
+  expect(screen.getByRole('tab')).toHaveAttribute('aria-selected', 'false');
 
-  const selected = mount((
-    <TabComponent selected tabFor="foo"><span>Tab 1</span></TabComponent>
-  ));
+  rerender(
+    <TabComponent selected tabFor="foo"><span>Tab 1</span></TabComponent>,
+  );
 
-  expect(selected.find('button').prop('aria-selected')).toBe(true);
+  expect(screen.getByRole('tab')).toHaveAttribute('aria-selected', 'true');
 });
 
 test('<TabComponent /> that is unselected is not focusable by default', () => {
-  const unselected = mount((
-    <TabComponent tabFor="foo"><span>Tab 1</span></TabComponent>
-  ));
+  const { rerender } = render(
+    <TabComponent tabFor="foo"><span>Tab 1</span></TabComponent>,
+  );
 
-  expect(unselected.find('button').prop('tabIndex')).toBe('-1');
+  expect(screen.getByRole('tab')).toHaveAttribute('tabIndex', '-1');
 
-  const selected = mount((
-    <TabComponent selected tabFor="foo"><span>Tab 1</span></TabComponent>
-  ));
+  rerender(
+    <TabComponent selected tabFor="foo"><span>Tab 1</span></TabComponent>,
+  );
 
-  expect(selected.find('button').prop('tabIndex')).toBe('0');
+  expect(screen.getByRole('tab')).toHaveAttribute('tabIndex', '0');
 });
 
-
 test('<TabComponent /> that is focusable should always have tabIndex 0', () => {
-  const unselected = mount((
-    <TabComponent focusable tabFor="foo"><span>Tab 1</span></TabComponent>
-  ));
+  const { rerender } = render(
+    <TabComponent focusable tabFor="foo"><span>Tab 1</span></TabComponent>,
+  );
 
-  expect(unselected.find('button').prop('tabIndex')).toBe('0');
+  expect(screen.getByRole('tab')).toHaveAttribute('tabIndex', '0');
 
-  const selected = mount((
-    <TabComponent focusable selected tabFor="foo"><span>Tab 1</span></TabComponent>
-  ));
+  rerender(
+    <TabComponent focusable selected tabFor="foo"><span>Tab 1</span></TabComponent>,
+  );
 
-  expect(selected.find('button').prop('tabIndex')).toBe('0');
+  expect(screen.getByRole('tab')).toHaveAttribute('tabIndex', '0');
 });
 
 test('<TabComponent /> should have the correct aria attributes', () => {
-  const tab = mount((
-    <TabComponent tabFor="foo"><span>Tab 1</span></TabComponent>
-  ));
+  render(
+    <TabComponent tabFor="foo"><span>Tab 1</span></TabComponent>,
+  );
 
-  expect(tab.find('button').prop('id')).toBe('foo-tab');
-  expect(tab.find('button').prop('aria-controls')).toBe('foo');
-  expect(tab.find('button').prop('role')).toBe('tab');
+  expect(screen.getByRole('tab')).toHaveAttribute('id', 'foo-tab');
+  expect(screen.getByRole('tab')).toHaveAttribute('aria-controls', 'foo');
+  expect(screen.getByRole('tab')).toHaveAttribute('role', 'tab');
 });
 
 test('<TabComponent /> should be able to set any className', () => {
-  const tab = shallow((
-    <TabComponent tabFor="foo" className="foo"><span>Tab 1</span></TabComponent>
-  ));
+  render(
+    <TabComponent tabFor="foo" className="foo"><span>Tab 1</span></TabComponent>,
+  );
 
-  expect(tab.hasClass('foo')).toBe(true);
+  expect(screen.getByRole('tab')).toHaveClass('foo');
 });

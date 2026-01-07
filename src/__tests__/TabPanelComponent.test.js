@@ -17,10 +17,13 @@ test('<TabPanelComponent /> should exist', () => {
 });
 
 test('<TabPanelComponent /> should render component', () => {
-  const Foo = () => (<span id="content">Foo</span>);
+  function Foo() {
+    return <span id="content">Foo</span>;
+  }
 
+  const FooComponent = Foo;
   const tabPanel = mount((
-    <TabPanelComponent selection={mockSelection()} tabId="foo" component={Foo} />
+    <TabPanelComponent selection={mockSelection()} tabId="foo" component={FooComponent} />
   ));
 
   expect(tabPanel.find('#content')).toBeTruthy();
