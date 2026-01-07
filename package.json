@@ -42,7 +42,10 @@
     "coverageReporters": [
       "lcov",
       "text"
-    ]
+    ],
+    "moduleNameMapper": {
+      "^react/compiler-runtime$": "react-compiler-runtime"
+    }
   },
   "scripts": {
     "prepublishOnly": "npm run clean && npm run lint && npm run test && npm run build",
