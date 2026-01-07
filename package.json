@@ -73,7 +73,7 @@
     "lint": "eslint . --max-warnings 0",
     "tsc": "tsc --noEmit",
     "prepare": "husky",
-    "docs:dev": "next dev",
+    "docs:dev": "next dev --webpack",
     "docs:build": "next build"
   },
   "devDependencies": {
