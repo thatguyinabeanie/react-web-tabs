@@ -51,7 +51,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:ci": "npm run test:coverage && cat coverage/lcov.info | coveralls",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings 0",
     "docs:clean": "rm -rf _book",
     "docs:prepare": "gitbook install",
     "docs:build": "npm run docs:prepare && gitbook build -g marcuslindfeldt/react-web-tabs",
